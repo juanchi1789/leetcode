@@ -176,3 +176,47 @@ def maxArea(self, height):
     a_max = max(distancia)
 
     return a_max
+
+def letterCombinations(self, digits: str) -> List[str]:
+
+    cell_phone = {2: ["a", "b", "c"], 3: ["d", "e", "f"], 4: ["g", "h", "i"], 5: ["j", "k", "l"],
+                  6: ["m", "n", "o"],
+                  7: ["p", "q", "r", "s"], 8: ["t", "u", "v"], 9: ["w", "x", "y", "z"]}
+
+    number = digits
+    input_number = [int(d) for d in str(number)]
+
+    if len(input_number) == 1:
+        return cell_phone[input_number[0]]
+    if len(input_number) == 0:
+        return []
+
+    print("Input numbers:", input_number)
+    list_join = []
+    for i in range(len(input_number)):
+        number = int(input_number[i])
+        try:
+            list_join.append(cell_phone[number])
+        except:
+            print(number, "is not a Possible number")
+    print("La lista es:", list_join)
+
+    # Have to build a fix_list and a total_list
+    fix_list = []
+    total_list = []
+
+    for w in range(len(list_join)):
+        if w == 0:
+            fix_list = list_join[w]
+        else:
+            total_list = total_list + list_join[w]
+
+    out_list = []
+    for i in range(len(fix_list)):
+        for k in range(len(total_list)):
+            value = fix_list[i]
+            out_list.append(value + total_list[k])
+
+    print("The output is:", out_list)
+
+    return out_list
